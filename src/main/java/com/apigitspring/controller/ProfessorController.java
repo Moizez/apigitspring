@@ -1,37 +1,28 @@
 package com.apigitspring.controller;
 
-import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.apigitspring.model.Professor;
-import com.apigitspring.repository.ProfessorRepository;
 
 
 @Controller
 @RequestMapping("/professor")
 public class ProfessorController {
 	
-	private ProfessorRepository repository;
-	
-	
 	private static final String Url_Api_Professor = "https://projetoifhelp.herokuapp.com/api/professor/";
 	
 	@GetMapping("/add")
-	public ModelAndView cadastrar(Professor professor) {
+	public ModelAndView add(Professor professor) {
 		
 		ModelAndView mv = new ModelAndView("/professor/form");
 		mv.addObject("professor", professor);
@@ -42,7 +33,7 @@ public class ProfessorController {
 	public ModelAndView salvar(@Valid Professor professor, BindingResult result	) {
 		RestTemplate rest = new RestTemplate();
 		if(result.hasErrors()) {
-			return cadastrar(professor); 
+			return add(professor); 
 		}
 
 		rest.postForObject(Url_Api_Professor, professor, Professor.class);
@@ -63,24 +54,21 @@ public class ProfessorController {
 		return mv;
 	}
 	
-	@PutMapping("/professor/{id}")
-	public ResponseEntity<Object> updateProfessor(@RequestBody Professor professor, @PathVariable long id) {
-
-		Optional<Professor> prof = repository.findById(id);
-
-		if (!prof.isPresent())
-			return ResponseEntity.notFound().build();
-
-		professor.setId(id);
+	@GetMapping("/edit/{id}")
+	public ModelAndView edit(@PathVariable("id") Long id) {
+		RestTemplate restTemplate = new RestTemplate();
+		Professor professor = restTemplate.getForObject(Url_Api_Professor +id, Professor.class);
 		
-		repository.save(professor);
-
-		return ResponseEntity.noContent().build();
+		return add(professor);
 	}
 	
-	@DeleteMapping("/professor/{id}")
-	public void delete(@PathVariable long id) {
-		repository.deleteById(id);
+	@GetMapping("/delete/{id}")
+	public  ModelAndView delete(@PathVariable("id") Long id) {
+	    	
+	    RestTemplate restTemplate = new RestTemplate();
+		restTemplate.delete(Url_Api_Professor + "{id}/", id);
+
+		return findAll();
 	}
 
 }
