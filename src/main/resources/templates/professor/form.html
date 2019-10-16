@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Cadastro de Professor</title>
+</head>
+<body>
+		<div class="content-wrapper" layout:fragment="corpo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Cadastro de Professor</strong>
+				</div>
+			<form class="container" method="post" th:object="${professor}"
+				th:action="@{/professor/save}">
+
+				<!--Input responsável em guardar o id-->
+				<input id="id" name="id" type="hidden" th:field="*{id}"
+					th:value="*{id}">
+
+				<!-- div reponsável em mostrar os erros -->
+				<div class="form-group row">
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert" th:if="${#fields.hasAnyErrors()}">
+
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
+						<div th:each="detailedError : ${#fields.detailedErrors()}">
+							<strong th:text="${detailedError.message}"> </strong>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+					    <label>Nome</label>
+					    <input type="text" class="form-control input-sm" th:field="*{nome}" autofocus="autofocus" placeholder="Informe o nome" maxlength="150"/>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('matricula')}? 'has-error'">
+					    <label>Matrícula</label>
+					    <input type="text" class="form-control input-sm" th:field="*{matricula}" autofocus="autofocus" placeholder="Informe a matricula" maxlength="150"/>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+					    <label>E-mail</label>
+					    <input type="text" class="form-control input-sm" th:field="*{email}" autofocus="autofocus" placeholder="Informe o email" maxlength="150"/>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<button type="submit" class="btn btn-primary">Cadastrar</button>
+					<button><a th:href="@{/}" class="btn btn-sm btn-danger">Cancelar</a></button>
+				</div>
+
+			</form>
+
+		</div>
+		</div>
+	
+</body>
+</html>
