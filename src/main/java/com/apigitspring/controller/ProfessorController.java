@@ -54,6 +54,7 @@ public class ProfessorController {
 		return mv;
 	}
 	
+	//Método de editar
 	@GetMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") Long id) {
 		RestTemplate restTemplate = new RestTemplate();
@@ -62,6 +63,7 @@ public class ProfessorController {
 		return add(professor);
 	}
 	
+	//Método de deletar
 	@GetMapping("/delete/{id}")
 	public  ModelAndView delete(@PathVariable("id") Long id) {
 	    	
