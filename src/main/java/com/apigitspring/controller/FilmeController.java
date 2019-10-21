@@ -47,7 +47,7 @@ public class FilmeController {
 		
 		Filme[] filme = rest.getForObject(Url_Api, Filme[].class);
 		
-		mv.addObject("filmees", filme);
+		mv.addObject("filmes", filme);
 		
 		return mv;
 	}
