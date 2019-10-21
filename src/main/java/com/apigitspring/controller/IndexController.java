@@ -9,7 +9,7 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public String index() {
-		return "/layout";
+		return "/layoutFilmes";
 	}
 	
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+
+<body>
+
+	<div th:fragment="menu-esquerdo">
+		<ul	class="navbar-nav bg-primary sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+
+			<!-- Menu esquerdo -->
+			<a class="sidebar-brand d-flex align-items-center justify-content-center"
+				th:href="@{/}">
+				<div>
+					<i class="fas fa-fw fa-book"></i>
+				</div>				
+				<div class="sidebar-brand-text mx-3">MOVIE STORE</div>				
+			</a>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+
+
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" th:href="@{/filme/add}"
+				data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> <i
+					class="fas fa-fw fa-clipboard"></i> <span>Cadastrar Filme</span></a>			
+			</li>
+
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" th:href="@{/filme/listar}"
+				data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities"> <i
+					class="fas fa-fw fa-search"></i> <span>Consultar Filme</span></a>
+			</li>
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+		</div>
+			
+			
+			<hr class="sidebar-divider my-0">
+
+			<!-- Nav Item - Dashboard -->
+			
+
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+
+			<!-- Heading -->
+			
+			<!-- Nav Item - Pages Collapse Menu -->
+						
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				 data-target="#collapseSair"
+				aria-expanded="false" aria-controls="collapseSair">
+				 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" th:href="@{/logout}"></i>Sair</a>
+					
+			</li>
+
+			<hr class="sidebar-divider">
+
+			<!-- Heading -->
+			<div class="sidebar-heading">Configurações</div>
+
+			<!-- Nav Item - Pages Collapse Menu -->
+		</ul>
+	</div>
+
+	
+</body>
+</html>
